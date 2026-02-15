@@ -800,9 +800,8 @@ vim.keymap.set('n', 'gl', vim.diagnostic.open_float)
 -- general keymaps
 vim.keymap.set("n", "<leader>q", "<cmd>q<CR>")
 vim.keymap.set("n", "<leader>w", "<cmd>w<CR>")
-
--- Optional: Force quit (quit even if unsaved changes)
 vim.keymap.set("n", "<leader>Q", "<cmd>q!<CR>")
+vim.keymap.set('n', '|', ':vsplit<CR>', { noremap = true, silent = true })
 
 -- neo tree commands
 vim.keymap.set("n", "<leader>ee", function()
