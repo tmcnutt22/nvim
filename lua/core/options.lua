@@ -1,6 +1,7 @@
 -- General
 local set = vim.opt
 
+set.autoread = true
 set.number = true
 set.relativenumber = true
 set.mouse = "a"

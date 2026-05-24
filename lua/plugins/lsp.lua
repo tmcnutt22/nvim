@@ -17,38 +17,57 @@ return {
 
       -- Enable LSP
       vim.lsp.enable('lua_ls')
-      -- Configure gopls (Go)
-      vim.lsp.config('gopls', {
+
+      -- vim.lsp.config('ts_ls', {})
+      vim.lsp.config('ts_ls', {
+        filetypes = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
         settings = {
-          gopls = {
-            completeUnimported = true,
-            usePlaceholders = true,
-            analyses = {
-              unusedparams = true,
+          typescript = {
+            suggest = {
+              autoImports = true,
+              includeCompletionsForImportStatements = true,
+            },
+          },
+          javascript = {
+            suggest = {
+              autoImports = true,
+              includeCompletionsForImportStatements = true,
             },
           },
         },
+        init_options = {
+          preferences = {
+            quotePreference = "single",
+            importModuleSpecifierPreference = "relative",
+          },
+        },
       })
-
-      -- Enable gopls
-      vim.lsp.enable('gopls')
-      vim.lsp.config('ts_ls', {}) -- TypeScript, minimal config
       vim.lsp.enable('ts_ls')
 
       -- Format on save for all file types with a lsp
-      vim.api.nvim_create_autocmd('LspAttach', {
-        callback = function(args)
-          local client = vim.lsp.get_client_by_id(args.data.client_id)
-          if not client then return end
-
-          vim.api.nvim_create_autocmd('BufWritePre', {
-            buffer = args.buf,
-            callback = function()
-              vim.lsp.buf.format({ bufnr = args.buf })
-            end,
+      -- vim.api.nvim_create_autocmd('LspAttach', {
+      --   callback = function(args)
+      --     local client = vim.lsp.get_client_by_id(args.data.client_id)
+      --     if not client then return end
+      --
+      --     vim.api.nvim_create_autocmd('BufWritePre', {
+      --       buffer = args.buf,
+      --       callback = function()
+      --         vim.lsp.buf.format({ bufnr = args.buf })
+      --       end,
+      --     })
+      --   end
+      -- })
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'cpp',
+        callback = function()
+          vim.lsp.start({
+            name = 'clangd',
+            cmd = { 'clangd' },
           })
-        end
+        end,
       })
+      vim.lsp.enable('clang')
     end,
   }
 }

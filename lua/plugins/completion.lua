@@ -3,6 +3,7 @@ return {
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
     dependencies = {
+      'hrsh7th/cmp-nvim-lsp',     -- LSP source
       'hrsh7th/cmp-buffer',       -- Buffer words
       'hrsh7th/cmp-path',         -- File paths
       'L3MON4D3/LuaSnip',         -- Snippets
@@ -23,6 +24,7 @@ return {
           ['<S-Tab>'] = cmp.mapping.select_prev_item(),
         }),
         sources = cmp.config.sources({
+          { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'buffer' },
           { name = 'path' },

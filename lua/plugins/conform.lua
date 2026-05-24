@@ -1,12 +1,12 @@
 return {
   {
     'stevearc/conform.nvim',
-    enabled = true,
+    enabled = false,
     config = function()
       require('conform').setup({
         formatters_by_ft = {
           lua = { "stylua" },
-          javascript = { "prettier" },  -- Just "prettier" will use project-local
+          javascript = { "prettier" }, -- Just "prettier" will use project-local
           typescript = { "prettier" },
           javascriptreact = { "prettier" },
           typescriptreact = { "prettier" },
@@ -36,3 +36,4 @@ return {
     end
   }
 }
+
